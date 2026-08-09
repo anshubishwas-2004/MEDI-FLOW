@@ -1,134 +1,192 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import {
+  CalendarCheck,
+  ChevronDown,
+  HeartPulse,
+  Menu,
+  Phone,
+  ShieldCheck,
+  Stethoscope,
+  UserRound,
+  X,
+} from "lucide-react";
+import { useContactInfo } from "../../services/contactInfo";
 
 function Nav() {
+  const contactInfo = useContactInfo();
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [showSignInDropdown, setShowSignInDropdown] = useState(false);
+  const [mobileOpen, setMobileOpen] = useState(false);
 
   useEffect(() => {
-    // Check if there is a token in localStorage when the component mounts
-    const token = localStorage.getItem("token");
-    if (token) {
-      setIsAuthenticated(true); // Set to true if the token exists
-    }
+    setIsAuthenticated(Boolean(localStorage.getItem("token")));
   }, []);
 
-  const toggleSignInDropdown = () => {
-    setShowSignInDropdown(!showSignInDropdown);
+  const closeMenus = () => {
+    setShowSignInDropdown(false);
+    setMobileOpen(false);
   };
 
-  const closeDropdown = () => {
-    setShowSignInDropdown(false);
-  };
+  const links = [
+    { name: "Home", path: "/" },
+    { name: "Facilities", path: "/Our-Facilities" },
+    { name: "Find Doctor", path: "/Find-Doctor" },
+    { name: "About", path: "/About-Us" },
+    { name: "Contact", path: "/Contact-Us" },
+  ];
 
   return (
-    <div className="w-full font-['Hanken_Grotesk']">
-      {/* Upper Navigation Bar - Now Fixed */}
-      <div className="w-full h-[50px] flex fixed top-0 left-0 z-50 shadow-md">
-        <div className="w-[1440px] bg-[#2b2c6c] flex items-center">
-          <Link
-            to="/Find-doctor"
-            className="ml-[110px] text-white text-xl font-semibold relative group hover:text-[#28b6a2] transition-colors duration-300 cursor-pointer"
-          >
-            FIND A DOCTOR
-            <span className="absolute bottom-0 left-0 w-0 h-[2px] bg-[#28b6a2] transition-all duration-300 group-hover:w-full" />
-          </Link>
-
-          <Link
-            to="/online-results"
-            className="ml-[180px] text-white text-xl font-semibold relative group hover:text-[#28b6a2] transition-colors duration-300 cursor-pointer"
-          >
-            ONLINE RESULTS
-            <span className="absolute bottom-0 left-0 w-0 h-[2px] bg-[#28b6a2] transition-all duration-300 group-hover:w-full" />
-          </Link>
-
-          <Link
-            to="/Book-Appointment"
-            className="ml-[180px] text-white text-xl font-semibold relative group hover:text-[#28b6a2] transition-colors duration-300 cursor-pointer"
-          >
-            BOOK AN APPOINTMENT
-            <span className="absolute bottom-0 left-0 w-0 h-[2px] bg-[#28b6a2] transition-all duration-300 group-hover:w-full" />
-          </Link>
-        </div>
-
-        <div className="w-[490px] bg-[#2FB297] flex items-center justify-center transition-colors duration-300">
-          <Link
-            to="/request-consultation"
-            className="relative text-white text-xl font-semibold py-2 px-4 rounded-md cursor-pointer transition-all duration-300 hover:text-[#2FB297] after:content-[''] after:absolute after:left-0 after:bottom-[-3px] after:h-[2px] after:w-0 after:bg-[#2FB297] after:transition-all after:duration-300 hover:after:w-full"
-          >
-            REQUEST A CONSULTATION
-          </Link>
+    <header className="sticky top-0 z-50">
+      <div className="top-ribbon hidden min-h-10 items-center px-5 text-sm text-white lg:flex">
+        <div className="mx-auto flex w-full max-w-7xl items-center justify-between">
+          <div className="flex items-center gap-6">
+            <span className="flex items-center gap-2 text-white/86">
+              <ShieldCheck size={16} />
+              Secure healthcare management
+            </span>
+            <Link to="/Book-Appointment" className="flex items-center gap-2 hover:text-[#bdeee0]">
+              <CalendarCheck size={16} />
+              Book appointment
+            </Link>
+            <Link to="/Find-Doctor" className="flex items-center gap-2 hover:text-[#bdeee0]">
+              <Stethoscope size={16} />
+              Find a doctor
+            </Link>
+          </div>
+          <span className="flex items-center gap-2 text-white/86">
+            <Phone size={16} />
+            {contactInfo.phone}
+          </span>
         </div>
       </div>
 
-      {/* Space for Fixed Navbar - Prevent Content Overlap */}
-      <div className="h-[50px]"></div>
-
-      {/* Main Navigation Bar */}
-      <div className="w-full h-[70px] flex items-center mt-0">
-        <div className="flex items-center ml-[60px]">
-          <Link to="/" className="flex items-center cursor-pointer">
-            <img src="/Logo.png" alt="Logo" className="h-[70px]" />
-            <div className="text-[#2b2c6c] ml-2 font-bold text-lg">
-              MEDI FLOW
-              <div className="text-xs">HEALTH AND WELLNESS CARE</div>
-            </div>
+      <nav className="nav-shell">
+        <div className="mx-auto flex min-h-[78px] w-full max-w-7xl items-center gap-4 px-4 sm:px-6 lg:px-8">
+          <Link to="/" className="flex min-w-fit items-center gap-3" onClick={closeMenus}>
+            <span className="grid h-11 w-11 place-items-center rounded-xl bg-[#e8f6ff] text-[#0f7fbf] ring-1 ring-[#cfe7f1]">
+              <HeartPulse size={25} />
+            </span>
+            <span className="leading-tight">
+              <span className="block text-xl font-extrabold tracking-tight text-[#102f45]">
+                MEDI FLOW
+              </span>
+              <span className="block text-[11px] font-bold uppercase tracking-[0.18em] text-[#607385]">
+                Health management system
+              </span>
+            </span>
           </Link>
-        </div>
 
-        <div className="ml-auto mr-[50px] flex space-x-10 font-semibold">
-          {[
-            { name: "Home", path: "/" },
-            { name: "Contact Us", path: "/Contact-Us" },
-            { name: "Our Facilities", path: "/Our-Facilities" },
-            { name: "About Us", path: "/About-Us" }
-          ].map((link, index) => (
-            <Link
-              key={index}
-              to={link.path}
-              className="relative py-2 text-black hover:text-pink-500 after:absolute after:left-0 after:bottom-0 after:h-0.5 after:w-0 after:bg-pink-500 after:transition-all after:duration-300 hover:after:w-full cursor-pointer"
-            >
-              {link.name}
-            </Link>
-          ))}
-          
-          {/* Sign In button directly navigates to '/Login' */}
-          {isAuthenticated ? (
-            <Link
-              to="/User-Account"
-              className="relative py-2 text-black hover:text-pink-500 after:absolute after:left-0 after:bottom-0 after:h-0.5 after:w-0 after:bg-pink-500 after:transition-all after:duration-300 hover:after:w-full cursor-pointer"
-            >
-              My Account
-            </Link>
-          ) : (
-            <div className="relative">
-              <div 
-                className="relative py-2 text-black hover:text-pink-500 after:absolute after:left-0 after:bottom-0 after:h-0.5 after:w-0 after:bg-pink-500 after:transition-all after:duration-300 hover:after:w-full cursor-pointer flex items-center"
-                onClick={toggleSignInDropdown}
+          <div className="ml-auto hidden items-center gap-1 lg:flex">
+            {links.map((link) => (
+              <Link
+                key={link.path}
+                to={link.path}
+                className="rounded-xl px-4 py-2 text-sm font-bold text-[#17324d] hover:bg-[#e8f6ff] hover:text-[#0f7fbf]"
               >
-                <span>Sign In</span>
-                <svg xmlns="http://www.w3.org/2000/svg" className="w-4 h-4 ml-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
-                </svg>
-              </div>
-              
-              {showSignInDropdown && (
-                <div className="absolute right-0 z-50 w-48 mt-2 bg-white border border-gray-200 rounded shadow-lg">
-                  <div className="py-2">
-                    <Link to="/login" className="block px-4 py-2 text-gray-800 hover:bg-gray-100" onClick={closeDropdown}>
+                {link.name}
+              </Link>
+            ))}
+          </div>
+
+          <div className="ml-auto hidden items-center gap-3 lg:ml-4 lg:flex">
+            <Link
+              to="/Book-Appointment"
+              className="inline-flex items-center gap-2 rounded-xl bg-[#0f7fbf] px-5 py-3 text-sm font-bold text-white shadow-lg shadow-blue-900/10 hover:bg-[#0d6fa8]"
+            >
+              <CalendarCheck size={18} />
+              Appointment
+            </Link>
+
+            {isAuthenticated ? (
+              <Link
+                to="/User-Account"
+                className="inline-flex items-center gap-2 rounded-xl border border-[#cfe7f1] bg-white px-5 py-3 text-sm font-bold text-[#17324d] hover:border-[#0f7fbf] hover:text-[#0f7fbf]"
+              >
+                <UserRound size={18} />
+                My Account
+              </Link>
+            ) : (
+              <div className="relative">
+                <button
+                  type="button"
+                  className="inline-flex items-center gap-2 rounded-xl border border-[#cfe7f1] bg-white px-5 py-3 text-sm font-bold text-[#17324d] hover:border-[#0f7fbf] hover:text-[#0f7fbf]"
+                  onClick={() => setShowSignInDropdown((open) => !open)}
+                >
+                  <UserRound size={18} />
+                  Sign In
+                  <ChevronDown
+                    size={16}
+                    className={`transition-transform ${showSignInDropdown ? "rotate-180" : ""}`}
+                  />
+                </button>
+
+                {showSignInDropdown && (
+                  <div className="absolute right-0 mt-3 w-56 rounded-2xl border border-[#d9e8ef] bg-white p-2 shadow-xl">
+                    <Link
+                      to="/login"
+                      className="block rounded-xl px-4 py-3 text-sm font-bold text-[#17324d] hover:bg-[#e8f6ff] hover:text-[#0f7fbf]"
+                      onClick={closeMenus}
+                    >
                       User Sign In
                     </Link>
-                    <Link to="/login-doctor" className="block px-4 py-2 text-gray-800 hover:bg-gray-100" onClick={closeDropdown}>
+                    <Link
+                      to="/login-doctor"
+                      className="block rounded-xl px-4 py-3 text-sm font-bold text-[#17324d] hover:bg-[#e8f8f2] hover:text-[#16845f]"
+                      onClick={closeMenus}
+                    >
                       Doctor Sign In
                     </Link>
                   </div>
-                </div>
-              )}
-            </div>
-          )}
+                )}
+              </div>
+            )}
+          </div>
+
+          <button
+            type="button"
+            className="ml-auto grid h-11 w-11 place-items-center rounded-xl border border-[#cfe7f1] bg-white text-[#17324d] lg:hidden"
+            onClick={() => setMobileOpen((open) => !open)}
+            aria-label="Toggle navigation"
+          >
+            {mobileOpen ? <X size={22} /> : <Menu size={22} />}
+          </button>
         </div>
-      </div>
-    </div>
+
+        {mobileOpen && (
+          <div className="border-t border-[#d9e8ef] bg-white px-4 py-4 shadow-xl lg:hidden">
+            <div className="grid gap-2">
+              {links.map((link) => (
+                <Link
+                  key={link.path}
+                  to={link.path}
+                  className="rounded-xl px-4 py-3 font-bold text-[#17324d] hover:bg-[#e8f6ff] hover:text-[#0f7fbf]"
+                  onClick={closeMenus}
+                >
+                  {link.name}
+                </Link>
+              ))}
+              <Link
+                to="/Book-Appointment"
+                className="mt-2 flex items-center justify-center gap-2 rounded-xl bg-[#0f7fbf] px-4 py-3 font-bold text-white"
+                onClick={closeMenus}
+              >
+                <CalendarCheck size={18} />
+                Book Appointment
+              </Link>
+              <Link
+                to={isAuthenticated ? "/User-Account" : "/login"}
+                className="flex items-center justify-center gap-2 rounded-xl border border-[#cfe7f1] px-4 py-3 font-bold text-[#17324d]"
+                onClick={closeMenus}
+              >
+                <UserRound size={18} />
+                {isAuthenticated ? "My Account" : "Sign In"}
+              </Link>
+            </div>
+          </div>
+        )}
+      </nav>
+    </header>
   );
 }
 

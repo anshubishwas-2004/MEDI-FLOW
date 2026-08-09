@@ -383,7 +383,7 @@ function UpdatePatientProfile({ user, onClose, onUpdate }) {
                         variant="contained"
                         endIcon={<NavigateNextIcon />}
                         sx={{
-                          bgcolor: "#e6317d",
+                          bgcolor: "#0f7fbf",
                           "&:hover": {
                             bgcolor: "#c62a6a",
                           },
@@ -567,7 +567,7 @@ function UpdatePatientProfile({ user, onClose, onUpdate }) {
                       InputProps={{
                         startAdornment: (
                           <InputAdornment position="start">
-                            <OpacityIcon sx={{ color: "#e6317d" }} />
+                            <OpacityIcon sx={{ color: "#0f7fbf" }} />
                           </InputAdornment>
                         ),
                       }}
@@ -638,7 +638,7 @@ function UpdatePatientProfile({ user, onClose, onUpdate }) {
                             )
                           }
                           sx={{
-                            bgcolor: "#e6317d",
+                            bgcolor: "#0f7fbf",
                             "&:hover": {
                               bgcolor: "#c62a6a",
                             },

@@ -1,7 +1,15 @@
 const Appointment = require("../Models/AppoinmentModel");
 const User = require("../Models/UserModel");
+const Doctor = require("../Models/DoctorManagement/doctorModel");
 const RejectedAppointment = require("../Models/RejectAppoinmentModel");
 const nodemailer = require("nodemailer");
+
+const normalizePhone = (value) => String(value || "").replace(/[\s-]/g, "");
+
+const isValidEmail = (value) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value);
+
+const isValidIndianPhone = (value) =>
+  /^(\+91)?[6-9]\d{9}$/.test(value) || /^0[6-9]\d{9}$/.test(value);
 
 // Nodemailer transporter setup
 const transporter = nodemailer.createTransport({
@@ -29,16 +37,11 @@ const createAppointment = async (req, res) => {
       user_id,
     } = req.body;
 
-    // Verify user exists
-    const user = await User.findById(user_id);
-    if (!user) {
-      return res.status(404).json({ message: "User not found" });
-    }
-
     // Validate required fields
     if (
       !name ||
       !address ||
+      !nic ||
       !phone ||
       !email ||
       !doctorName ||
@@ -51,6 +54,55 @@ const createAppointment = async (req, res) => {
       return res.status(400).json({ message: "Please fill all required fields" });
     }
 
+    const cleanPhone = normalizePhone(phone);
+    if (!isValidIndianPhone(cleanPhone)) {
+      return res.status(400).json({ message: "Please provide a valid Indian mobile number" });
+    }
+
+    if (!isValidEmail(email)) {
+      return res.status(400).json({ message: "Please provide a valid email address" });
+    }
+
+    const appointmentDate = new Date(date);
+    if (Number.isNaN(appointmentDate.getTime())) {
+      return res.status(400).json({ message: "Please provide a valid appointment date" });
+    }
+
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
+    const requestedDay = new Date(appointmentDate);
+    requestedDay.setHours(0, 0, 0, 0);
+    if (requestedDay < today) {
+      return res.status(400).json({ message: "Appointment date cannot be in the past" });
+    }
+
+    // Verify user exists
+    const user = await User.findById(user_id);
+    if (!user) {
+      return res.status(404).json({ message: "User not found" });
+    }
+
+    const doctor = await Doctor.findById(doctor_id);
+    if (!doctor) {
+      return res.status(404).json({ message: "Doctor not found" });
+    }
+
+    const slotExists = await Appointment.findOne({
+      doctor_id,
+      date: {
+        $gte: requestedDay,
+        $lt: new Date(requestedDay.getTime() + 24 * 60 * 60 * 1000),
+      },
+      time,
+      status: { $in: ["Pending", "Accepted"] },
+    });
+
+    if (slotExists) {
+      return res.status(409).json({
+        message: "This doctor already has an appointment in the selected time slot",
+      });
+    }
+
     // Generate appointment index number
     const appointmentCount = await Appointment.countDocuments();
     const indexno = `APP${String(appointmentCount + 1).padStart(4, "0")}`;
@@ -60,12 +112,12 @@ const createAppointment = async (req, res) => {
       name,
       address,
       nic,
-      phone,
+      phone: cleanPhone,
       email,
-      doctorName,
+      doctorName: doctor.name || doctorName,
       doctor_id,
-      specialization,
-      date,
+      specialization: doctor.specialization || specialization,
+      date: appointmentDate,
       time,
       user_id,
     });
@@ -88,6 +140,19 @@ const getAppointments = async (req, res) => {
     res.status(200).json({ appoinments: appointments });
   } catch (error) {
     console.error("Error fetching appointments:", error);
+    res.status(500).json({ message: "Server error" });
+  }
+};
+
+const getMyAppointments = async (req, res) => {
+  try {
+    const appointments = await Appointment.find({ user_id: req.user.id }).sort({
+      createdAt: -1,
+      _id: -1,
+    });
+    res.status(200).json({ appoinments: appointments });
+  } catch (error) {
+    console.error("Error fetching user appointments:", error);
     res.status(500).json({ message: "Server error" });
   }
 };
@@ -292,6 +357,7 @@ const rejectAppointment = async (req, res) => {
 module.exports = {
   createAppointment,
   getAppointments,
+  getMyAppointments,
   getAppointmentById,
   updateAppointment,
   deleteAppointment,

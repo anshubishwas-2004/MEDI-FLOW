@@ -9,6 +9,7 @@ import AboutUs from "./Components/Main Component/AboutUs";
 import ContactUs from "./Components/Main Component/ContactUs";
 import OurFacilities from "./Components/Main Component/OurFacilities";
 import FindADoctor from "./Components/Doctor Component/FindADoctor";
+import PublicInfoPage from "./Components/Main Component/PublicInfoPage";
 
 //User Components
 import UserManagement from "./Components/User Component/UserAdmin/UserManagement";
@@ -80,6 +81,12 @@ function App() {
           <Route path="/Contact-Us" element={<ContactUs />} />
           <Route path="/Our-Facilities" element={<OurFacilities />} />
           <Route path="/Find-Doctor" element={<FindADoctor />} />
+          <Route path="/request-consultation" element={<PublicInfoPage pageKey="/request-consultation" />} />
+          <Route path="/online-results" element={<PublicInfoPage pageKey="/online-results" />} />
+          <Route path="/Privacy-Policy" element={<PublicInfoPage pageKey="/Privacy-Policy" />} />
+          <Route path="/FAQ" element={<PublicInfoPage pageKey="/FAQ" />} />
+          <Route path="/Blog" element={<PublicInfoPage pageKey="/Blog" />} />
+          <Route path="/Help" element={<PublicInfoPage pageKey="/Help" />} />
 
           {/*User Components*/}
           <Route path="/User-Management" element={<UserManagement />} />
@@ -127,6 +134,7 @@ function App() {
             element={<AppoinmentManagement />}
           />
           <Route path="Rijected-Appoinment" element={<RejectedAppoinment />} />
+          <Route path="*" element={<PublicInfoPage pageKey="/FAQ" />} />
         </Routes>
         {/*  Conditionally show Chatbot */}
         {showChatbot && (

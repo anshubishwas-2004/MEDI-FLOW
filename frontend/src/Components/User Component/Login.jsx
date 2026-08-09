@@ -4,22 +4,19 @@ import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 import {
   Box,
-  TextField,
   Button,
-  Typography,
   CircularProgress,
-  Container,
-  Grid,
-  Paper,
   IconButton,
   InputAdornment,
+  TextField,
 } from "@mui/material";
 import {
-  Visibility,
-  VisibilityOff,
   EmailOutlined,
   LockOutlined,
+  Visibility,
+  VisibilityOff,
 } from "@mui/icons-material";
+import { HeartPulse, ShieldCheck } from "lucide-react";
 
 function Login() {
   const [formData, setFormData] = useState({ email: "", password: "" });
@@ -28,9 +25,9 @@ function Login() {
   const [showPassword, setShowPassword] = useState(false);
   const navigate = useNavigate();
 
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData((prev) => ({ ...prev, [name]: value }));
+  const handleChange = (event) => {
+    const { name, value } = event.target;
+    setFormData((previous) => ({ ...previous, [name]: value }));
   };
 
   const validateForm = () => {
@@ -50,8 +47,8 @@ function Login() {
     return true;
   };
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
+  const handleSubmit = async (event) => {
+    event.preventDefault();
     setError("");
 
     if (!validateForm()) return;
@@ -59,7 +56,7 @@ function Login() {
     setLoading(true);
     try {
       const response = await axios.post(
-  `${import.meta.env.VITE_API_URL}/api/auth/login`,
+        `${import.meta.env.VITE_API_URL}/api/auth/login`,
         formData
       );
       localStorage.setItem("token", response.data.token);
@@ -68,13 +65,13 @@ function Login() {
         toast: true,
         position: "top-end",
         icon: "success",
-        title: "✅ Login Successful",
+        title: "Login successful",
         showConfirmButton: false,
-        timer: 2500,
+        timer: 2200,
         timerProgressBar: true,
-        background: "#f0f4ff",
-        color: "#2b2c6c",
-        iconColor: "#2fb297",
+        background: "#ffffff",
+        color: "#17324d",
+        iconColor: "#24a67a",
         customClass: {
           popup: "swal2-rounded",
         },
@@ -101,13 +98,13 @@ function Login() {
         } else {
           navigate("/");
         }
-      }, 2500);
-    } catch (error) {
+      }, 2200);
+    } catch (requestError) {
       Swal.fire({
         icon: "error",
-        title: "Login Failed",
+        title: "Login failed",
         text:
-          error.response?.data?.message ||
+          requestError.response?.data?.message ||
           "Login failed. Please check your credentials.",
       });
     } finally {
@@ -116,166 +113,132 @@ function Login() {
   };
 
   return (
-    <Box sx={{ height: "100vh", display: "flex", alignItems: "center" }}>
-      <Container maxWidth="lg">
-        <Grid container spacing={2} alignItems="center" justifyContent="center">
-          {/* Logo Section */}
-          <Grid
-            item
-            xs={12}
-            md={6}
-            sx={{
-              display: { xs: "none", md: "flex" },
-              justifyContent: "center",
-              alignItems: "center",
-            }}
-          >
-            <img src="/Logo.png" alt="Logo" className="h-[200px] w-auto" />
-          </Grid>
+    <main className="min-h-screen bg-[#f6fcff]">
+      <div className="mx-auto grid min-h-screen w-full max-w-6xl gap-10 px-4 py-10 lg:grid-cols-[0.95fr_1fr] lg:items-center">
+        <section className="hidden lg:block">
+          <div className="mb-8 flex items-center gap-3">
+            <span className="grid h-12 w-12 place-items-center rounded-xl bg-[#e8f6ff] text-[#0f7fbf] ring-1 ring-[#cfe7f1]">
+              <HeartPulse size={27} />
+            </span>
+            <div>
+              <h1 className="m-0 text-2xl font-extrabold text-[#102f45]">MEDI FLOW</h1>
+              <p className="m-0 text-sm font-bold uppercase tracking-[0.18em] text-[#607385]">
+                Secure access
+              </p>
+            </div>
+          </div>
 
-          {/* Login Form Section */}
-          <Grid item xs={12} md={6}>
-            <Paper
-              elevation={6}
-              sx={{
-                padding: 4,
-                borderRadius: 3,
-                maxWidth: 400,
-                margin: "0 auto",
+          <div className="overflow-hidden rounded-[28px] border border-[#d9e8ef] bg-white p-4 shadow-2xl shadow-slate-900/8">
+            <img
+              src="/Home1.jpg"
+              alt="Healthcare professionals"
+              className="h-[430px] w-full rounded-3xl object-cover"
+            />
+          </div>
+
+          <div className="mt-6 flex items-start gap-4 rounded-2xl border border-[#d9e8ef] bg-white p-5">
+            <span className="grid h-11 w-11 shrink-0 place-items-center rounded-xl bg-[#e8f8f2] text-[#24a67a]">
+              <ShieldCheck size={23} />
+            </span>
+            <p className="m-0 leading-7 text-[#607385]">
+              Access patient, doctor, pharmacy, and appointment workspaces from
+              one secure healthcare management system.
+            </p>
+          </div>
+        </section>
+
+        <section className="mx-auto w-full max-w-md rounded-3xl border border-[#d9e8ef] bg-white p-6 shadow-xl shadow-slate-900/8 md:p-8">
+          <div className="mb-7 text-center">
+            <div className="mx-auto mb-4 grid h-14 w-14 place-items-center rounded-2xl bg-[#e8f6ff] text-[#0f7fbf] lg:hidden">
+              <HeartPulse size={30} />
+            </div>
+            <h2 className="m-0 text-3xl font-extrabold text-[#102f45]">Welcome back</h2>
+            <p className="m-0 mt-2 text-sm leading-6 text-[#607385]">
+              Sign in to continue to your MEDI FLOW workspace.
+            </p>
+          </div>
+
+          {error && (
+            <p className="mb-4 rounded-xl bg-red-50 p-3 text-center text-sm font-bold text-red-600">
+              {error}
+            </p>
+          )}
+
+          <Box component="form" onSubmit={handleSubmit} sx={{ width: "100%" }}>
+            <TextField
+              fullWidth
+              margin="normal"
+              label="Email"
+              name="email"
+              value={formData.email}
+              onChange={handleChange}
+              placeholder="Enter your email"
+              InputProps={{
+                startAdornment: (
+                  <InputAdornment position="start">
+                    <EmailOutlined color="action" />
+                  </InputAdornment>
+                ),
               }}
+            />
+            <TextField
+              fullWidth
+              margin="normal"
+              label="Password"
+              name="password"
+              type={showPassword ? "text" : "password"}
+              value={formData.password}
+              onChange={handleChange}
+              placeholder="Enter your password"
+              InputProps={{
+                startAdornment: (
+                  <InputAdornment position="start">
+                    <LockOutlined color="action" />
+                  </InputAdornment>
+                ),
+                endAdornment: (
+                  <InputAdornment position="end">
+                    <IconButton
+                      onClick={() => setShowPassword(!showPassword)}
+                      edge="end"
+                    >
+                      {showPassword ? <VisibilityOff /> : <Visibility />}
+                    </IconButton>
+                  </InputAdornment>
+                ),
+              }}
+            />
+
+            <Button
+              type="submit"
+              fullWidth
+              variant="contained"
+              disabled={loading}
+              sx={{ mt: 3, mb: 2, py: 1.4, borderRadius: 2, fontWeight: 800 }}
             >
-              <Typography
-                component="h1"
-                variant="h4"
-                sx={{
-                  fontWeight: 700,
-                  marginBottom: 1,
-                  textAlign: "center",
-                  color: "#1976d2",
-                }}
+              {loading ? <CircularProgress size={24} /> : "Sign In"}
+            </Button>
+
+            <div className="flex items-center justify-between gap-3">
+              <Button
+                color="primary"
+                onClick={() => navigate("/forgot-password")}
+                sx={{ textTransform: "none", fontWeight: 700 }}
               >
-                Welcome
-              </Typography>
-              <Typography
-                component="h2"
-                variant="h5"
-                sx={{
-                  fontWeight: 500,
-                  marginBottom: 3,
-                  textAlign: "center",
-                  color: "#1976d2",
-                }}
+                Forgot Password?
+              </Button>
+              <Button
+                color="primary"
+                onClick={() => navigate("/registration")}
+                sx={{ textTransform: "none", fontWeight: 700 }}
               >
-                MEDI FLOW
-              </Typography>
-
-              {error && (
-                <Typography
-                  color="error"
-                  sx={{
-                    width: "100%",
-                    textAlign: "center",
-                    marginBottom: 2,
-                  }}
-                >
-                  {error}
-                </Typography>
-              )}
-
-              <Box
-                component="form"
-                onSubmit={handleSubmit}
-                sx={{ width: "100%" }}
-              >
-                <TextField
-                  fullWidth
-                  margin="normal"
-                  label="Email"
-                  name="email"
-                  value={formData.email}
-                  onChange={handleChange}
-                  placeholder="Enter your email"
-                  InputProps={{
-                    startAdornment: (
-                      <InputAdornment position="start">
-                        <EmailOutlined color="action" />
-                      </InputAdornment>
-                    ),
-                  }}
-                />
-                <TextField
-                  fullWidth
-                  margin="normal"
-                  label="Password"
-                  name="password"
-                  type={showPassword ? "text" : "password"}
-                  value={formData.password}
-                  onChange={handleChange}
-                  placeholder="Enter your password"
-                  InputProps={{
-                    startAdornment: (
-                      <InputAdornment position="start">
-                        <LockOutlined color="action" />
-                      </InputAdornment>
-                    ),
-                    endAdornment: (
-                      <InputAdornment position="end">
-                        <IconButton
-                          onClick={() => setShowPassword(!showPassword)}
-                          edge="end"
-                        >
-                          {showPassword ? <VisibilityOff /> : <Visibility />}
-                        </IconButton>
-                      </InputAdornment>
-                    ),
-                  }}
-                />
-
-                <Button
-                  type="submit"
-                  fullWidth
-                  variant="contained"
-                  disabled={loading}
-                  sx={{
-                    mt: 3,
-                    mb: 2,
-                    backgroundColor: "#1976d2",
-                    "&:hover": {
-                      backgroundColor: "#1565c0",
-                    },
-                  }}
-                >
-                  {loading ? <CircularProgress size={24} /> : "Sign In"}
-                </Button>
-
-                <Box
-                  sx={{
-                    display: "flex",
-                    justifyContent: "space-between",
-                    width: "100%",
-                  }}
-                >
-                  <Button
-                    color="primary"
-                    onClick={() => navigate("/forgot-password")}
-                    sx={{ textTransform: "none" }}
-                  >
-                    Forgot Password?
-                  </Button>
-                  <Button
-                    color="primary"
-                    onClick={() => navigate("/registration")}
-                    sx={{ textTransform: "none" }}
-                  >
-                    Create Account
-                  </Button>
-                </Box>
-              </Box>
-            </Paper>
-          </Grid>
-        </Grid>
-      </Container>
-    </Box>
+                Create Account
+              </Button>
+            </div>
+          </Box>
+        </section>
+      </div>
+    </main>
   );
 }
 

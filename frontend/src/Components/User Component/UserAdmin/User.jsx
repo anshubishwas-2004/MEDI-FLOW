@@ -38,7 +38,7 @@ function User({ row }) {
           <Button
             variant="contained"
             sx={{
-              backgroundColor: "#E6317D",
+              backgroundColor: "#0f7fbf",
               "&:hover": { backgroundColor: "#C02568" },
               textTransform: "none",
             }}

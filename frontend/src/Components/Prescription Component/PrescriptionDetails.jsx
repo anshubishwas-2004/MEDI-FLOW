@@ -25,8 +25,10 @@ import {
   LocalHospital,
   GetApp as DownloadIcon,
 } from "@mui/icons-material";
+import { useContactInfo } from "../../services/contactInfo";
 
 function PrescriptionDetails({ prescription }) {
+  const contactInfo = useContactInfo();
   const prescriptionRef = useRef(null);
 
   // Format date for display
@@ -105,9 +107,9 @@ function PrescriptionDetails({ prescription }) {
 
     // Add contact information
     doc.setFontSize(8);
-    doc.text("123 Medical Center Drive, Healthcare City", 15, 32);
-    doc.text("Phone: (123) 456-7890 | Email: care@mediflow.com", 15, 36);
-    doc.text("www.mediflow.com", 15, 40);
+    doc.text(contactInfo.address, 15, 32);
+    doc.text(`Phone: ${contactInfo.phone} | Email: ${contactInfo.email || "Configured in backend"}`, 15, 36);
+    doc.text(contactInfo.website, 15, 40);
 
     // Add prescription title and box
     doc.setFillColor(47, 178, 151, 0.1); // Light green background
@@ -323,7 +325,7 @@ function PrescriptionDetails({ prescription }) {
 
       // Center - website
       doc.text(
-        "www.mediflow.com",
+        contactInfo.website,
         doc.internal.pageSize.getWidth() / 2,
         doc.internal.pageSize.height - 12,
         {
@@ -425,7 +427,7 @@ function PrescriptionDetails({ prescription }) {
             <Grid container spacing={2}>
               <Grid item xs={12} md={6}>
                 <Box sx={{ display: "flex", alignItems: "center", mb: 1 }}>
-                  <EventNote sx={{ color: "#e6317d", mr: 1 }} />
+                  <EventNote sx={{ color: "#0f7fbf", mr: 1 }} />
                   <Typography variant="body2" color="textSecondary">
                     Date Issued:
                   </Typography>
@@ -458,7 +460,7 @@ function PrescriptionDetails({ prescription }) {
                 </Box>
 
                 <Box sx={{ display: "flex", alignItems: "center" }}>
-                  <Assignment sx={{ color: "#e6317d", mr: 1 }} />
+                  <Assignment sx={{ color: "#0f7fbf", mr: 1 }} />
                   <Typography variant="body2" color="textSecondary">
                     Appointment ID:
                   </Typography>

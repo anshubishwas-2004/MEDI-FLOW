@@ -188,7 +188,7 @@ const NoveltyComponent = () => {
   };
 
   const severityColors = {
-    high: "#e6317d",
+    high: "#0f7fbf",
     medium: "#FFC107",
     low: "#2fb297",
     unknown: "#828487",
@@ -244,7 +244,7 @@ const NoveltyComponent = () => {
     >
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <div className="absolute top-0 left-0 w-full h-full">
-          <div className="absolute w-40 h-40 bg-pink-200 rounded-full -top-10 -left-10 opacity-20 animate-blob"></div>
+          <div className="absolute w-40 h-40 bg-blue-200 rounded-full -top-10 -left-10 opacity-20 animate-blob"></div>
           <div className="absolute bg-blue-200 rounded-full top-20 right-20 w-60 h-60 opacity-20 animate-blob animation-delay-2000"></div>
           <div className="absolute w-40 h-40 bg-green-200 rounded-full bottom-20 left-1/3 opacity-20 animate-blob animation-delay-4000"></div>
         </div>
@@ -254,7 +254,7 @@ const NoveltyComponent = () => {
         whileHover={{ scale: 1.05 }}
         whileTap={{ scale: 0.95 }}
         onClick={() => navigate(-1)}
-        className="absolute z-10 flex items-center px-3 py-2 text-gray-700 transition-colors bg-white rounded-full shadow-md top-4 left-4 hover:text-pink-600"
+        className="absolute z-10 flex items-center px-3 py-2 text-gray-700 transition-colors bg-white rounded-full shadow-md top-4 left-4 hover:text-blue-700"
       >
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -280,7 +280,7 @@ const NoveltyComponent = () => {
           transition={{ duration: 0.5 }}
           className="flex flex-col items-center mb-8"
         >
-          <div className="inline-flex items-center justify-center p-4 mb-4 rounded-full shadow-lg bg-gradient-to-r from-pink-500 to-rose-500">
+          <div className="inline-flex items-center justify-center p-4 mb-4 rounded-full shadow-lg bg-gradient-to-r from-blue-600 to-emerald-600">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               className="w-10 h-10 text-white"
@@ -296,7 +296,7 @@ const NoveltyComponent = () => {
               />
             </svg>
           </div>
-          <h1 className="mb-2 text-4xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-pink-600">
+          <h1 className="mb-2 text-4xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-blue-700">
             AI Symptom Analyzer
           </h1>
           <p className="max-w-lg text-center text-gray-600">
@@ -310,7 +310,7 @@ const NoveltyComponent = () => {
           transition={{ duration: 0.5 }}
           className="flex flex-col items-center mb-4"
         >
-          <h1 className="mb-2 text-3xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-pink-600">
+          <h1 className="mb-2 text-3xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-blue-700">
             Analysis Results
           </h1>
         </motion.div>
@@ -332,7 +332,7 @@ const NoveltyComponent = () => {
               transition={{ duration: 0.5, delay: 0.4 }}
               className="overflow-hidden bg-white shadow-xl rounded-xl"
             >
-              <div className="p-4 bg-gradient-to-r from-pink-500 to-rose-500">
+              <div className="p-4 bg-gradient-to-r from-blue-600 to-emerald-600">
                 <h2 className="text-xl font-bold text-white">
                   {getHighestProbabilityCondition()}
                 </h2>
@@ -510,7 +510,7 @@ const NoveltyComponent = () => {
                           whileHover={{ scale: 1.03, y: -2 }}
                           whileTap={{ scale: 0.97 }}
                           onClick={() => navigate("/health-trends")}
-                          className="flex items-center px-8 py-3 font-medium text-white transition-all rounded-full shadow-lg bg-gradient-to-r from-pink-500 to-rose-500 hover:shadow-pink-200 hover:from-pink-600 hover:to-rose-600"
+                          className="flex items-center px-8 py-3 font-medium text-white transition-all rounded-full shadow-lg bg-gradient-to-r from-blue-600 to-emerald-600 hover:shadow-blue-200 hover:from-blue-700 hover:to-emerald-700"
                         >
                           <span>Continue to Health Trends</span>
                           <svg
@@ -665,7 +665,7 @@ const NoveltyComponent = () => {
                       }%`,
                     }}
                     transition={{ duration: 0.5 }}
-                    className="h-full bg-gradient-to-r from-pink-500 to-purple-500"
+                    className="h-full bg-gradient-to-r from-blue-600 to-emerald-600"
                   />
                 </div>
               </div>
@@ -703,7 +703,7 @@ const NoveltyComponent = () => {
                     whileHover={{ scale: 1.05 }}
                     whileTap={{ scale: 0.95 }}
                     onClick={handleSubmit}
-                    className="px-6 py-3 mt-6 font-medium text-white transition-all transform rounded-lg shadow-lg bg-gradient-to-r from-pink-500 to-purple-500 hover:from-pink-600 hover:to-purple-600"
+                    className="px-6 py-3 mt-6 font-medium text-white transition-all transform rounded-lg shadow-lg bg-gradient-to-r from-blue-600 to-emerald-600 hover:from-blue-700 hover:to-emerald-700"
                   >
                     Start Symptom Analysis
                   </motion.button>
@@ -728,7 +728,7 @@ const NoveltyComponent = () => {
                             key={index}
                             className={`w-3 h-3 mx-1 rounded-full ${
                               index === currentSectionIndex
-                                ? "bg-gradient-to-r from-pink-500 to-purple-500"
+                                ? "bg-gradient-to-r from-blue-600 to-emerald-600"
                                 : index < currentSectionIndex
                                 ? "bg-indigo-300"
                                 : "bg-gray-300"
@@ -779,14 +779,14 @@ const NoveltyComponent = () => {
                               onClick={() => handleToggle(symptomObj.name)}
                               className={`flex items-center p-3 space-x-3 transition-all border rounded-lg cursor-pointer ${
                                 selectedSymptoms.includes(symptomObj.name)
-                                  ? "border-pink-500 bg-pink-50 shadow-sm"
-                                  : "border-gray-200 hover:border-pink-200 hover:bg-pink-50/30"
+                                  ? "border-blue-600 bg-blue-50 shadow-sm"
+                                  : "border-gray-200 hover:border-blue-200 hover:bg-blue-50/30"
                               }`}
                             >
                               <div
                                 className={`flex items-center justify-center w-8 h-8 text-lg rounded-full ${
                                   selectedSymptoms.includes(symptomObj.name)
-                                    ? "bg-pink-100"
+                                    ? "bg-blue-100"
                                     : "bg-gray-100"
                                 }`}
                               >
@@ -795,7 +795,7 @@ const NoveltyComponent = () => {
                               <span
                                 className={`${
                                   selectedSymptoms.includes(symptomObj.name)
-                                    ? "font-medium text-pink-900"
+                                    ? "font-medium text-blue-900"
                                     : "text-gray-700"
                                 }`}
                               >
@@ -805,7 +805,7 @@ const NoveltyComponent = () => {
                               <div
                                 className={`w-6 h-6 border rounded-md ${
                                   selectedSymptoms.includes(symptomObj.name)
-                                    ? "bg-pink-500 border-pink-500"
+                                    ? "bg-blue-600 border-blue-600"
                                     : "border-gray-300"
                                 } flex items-center justify-center`}
                               >
@@ -866,7 +866,7 @@ const NoveltyComponent = () => {
                       whileHover={{ scale: 1.05 }}
                       whileTap={{ scale: 0.95 }}
                       onClick={goToNextSection}
-                      className="flex items-center px-5 py-2 font-medium text-white transition-all rounded-lg shadow-md bg-gradient-to-r from-pink-500 to-rose-500 hover:from-pink-600 hover:to-rose-600"
+                      className="flex items-center px-5 py-2 font-medium text-white transition-all rounded-lg shadow-md bg-gradient-to-r from-blue-600 to-emerald-600 hover:from-blue-700 hover:to-emerald-700"
                     >
                       {currentSectionIndex < sectionNames.length - 1 ? (
                         <>

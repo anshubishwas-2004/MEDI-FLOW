@@ -46,8 +46,10 @@ import {
   Refresh as RefreshIcon,
   GetApp as DownloadIcon,
 } from "@mui/icons-material";
+import { useContactInfo } from "../../services/contactInfo";
 
 function Stock() {
+  const contactInfo = useContactInfo();
   const navigate = useNavigate();
   const [stockData, setStockData] = useState([]);
   const [filteredData, setFilteredData] = useState([]);
@@ -246,9 +248,9 @@ function Stock() {
     doc.setFont("helvetica", "normal");
     doc.setFontSize(8);
     doc.setTextColor(100, 100, 100);
-    doc.text("123 Medical Center Drive, Healthcare City", 15, 32);
-    doc.text("Phone: (123) 456-7890 | Email: pharmacy@mediflow.com", 15, 36);
-    doc.text("www.mediflow.com", 15, 40);
+    doc.text(contactInfo.address, 15, 32);
+    doc.text(`Phone: ${contactInfo.phone} | Email: ${contactInfo.email || "Configured in backend"}`, 15, 36);
+    doc.text(contactInfo.website, 15, 40);
 
     // Add date in header (moved to right side)
     doc.setFontSize(9);
@@ -449,7 +451,7 @@ function Stock() {
 
       // Center - website
       doc.text(
-        "www.mediflow.com",
+        contactInfo.website,
         doc.internal.pageSize.getWidth() / 2,
         doc.internal.pageSize.height - 12,
         {
@@ -537,7 +539,7 @@ function Stock() {
               </Typography>
               <Typography
                 variant="h3"
-                sx={{ fontWeight: "bold", mt: 2, color: "#e6317d" }}
+                sx={{ fontWeight: "bold", mt: 2, color: "#0f7fbf" }}
               >
                 {loading ? (
                   <CircularProgress size={30} />
@@ -804,7 +806,7 @@ function Stock() {
                               setStockToDelete(item._id);
                               setIsDeleteConfirmOpen(true);
                             }}
-                            sx={{ color: "#e6317d" }}
+                            sx={{ color: "#0f7fbf" }}
                           >
                             <DeleteOutline fontSize="small" />
                           </IconButton>

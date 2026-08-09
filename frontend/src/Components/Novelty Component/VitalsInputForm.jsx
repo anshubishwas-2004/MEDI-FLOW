@@ -137,7 +137,7 @@ function VitalsInputForm() {
           right: 16,
           color: "#2b2c6c",
           fontWeight: "medium",
-          "&:hover": { color: "#e6317d" },
+          "&:hover": { color: "#0f7fbf" },
           zIndex: 10,
         }}
       >
@@ -172,7 +172,7 @@ function VitalsInputForm() {
             <Grid container spacing={3}>
               <Grid item xs={12}>
                 <Box sx={{ display: "flex", alignItems: "flex-start" }}>
-                  <MonitorHeartIcon sx={{ mt: 2, mr: 1.5, color: "#e6317d" }} />
+                  <MonitorHeartIcon sx={{ mt: 2, mr: 1.5, color: "#0f7fbf" }} />
                   <Box sx={{ width: "100%" }}>
                     <TextField
                       fullWidth
@@ -236,7 +236,7 @@ function VitalsInputForm() {
 
               <Grid item xs={12}>
                 <Box sx={{ display: "flex", alignItems: "flex-start" }}>
-                  <BloodtypeIcon sx={{ mt: 2, mr: 1.5, color: "#e6317d" }} />
+                  <BloodtypeIcon sx={{ mt: 2, mr: 1.5, color: "#0f7fbf" }} />
                   <Box sx={{ width: "100%" }}>
                     <TextField
                       fullWidth
@@ -310,7 +310,7 @@ function VitalsInputForm() {
               endIcon={<ArrowForwardIcon />}
               sx={{
                 mt: 3,
-                bgcolor: "#e6317d",
+                bgcolor: "#0f7fbf",
                 "&:hover": { bgcolor: "#c62a6a" },
               }}
             >
@@ -324,7 +324,7 @@ function VitalsInputForm() {
               variant="outlined"
               color="secondary"
               onClick={handleLoginRedirect}
-              sx={{ mt: 3, borderColor: "#e6317d", color: "#e6317d" }}
+              sx={{ mt: 3, borderColor: "#0f7fbf", color: "#0f7fbf" }}
             >
               Login to Save Your Vitals
             </Button>

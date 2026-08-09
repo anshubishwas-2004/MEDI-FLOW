@@ -1,9 +1,99 @@
-@import url("https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap");
 
 @import "tailwindcss";
 
+:root {
+  --mf-ink: #0f2433;
+  --mf-navy: #17324d;
+  --mf-blue: #0f7fbf;
+  --mf-blue-soft: #e8f6ff;
+  --mf-cyan: #3bb9d6;
+  --mf-green: #24a67a;
+  --mf-green-soft: #e8f8f2;
+  --mf-mint: #bdeee0;
+  --mf-surface: #ffffff;
+  --mf-bg: #f5fbfd;
+  --mf-line: #d9e8ef;
+  --mf-muted: #607385;
+  --mf-shadow: 0 18px 50px rgba(23, 50, 77, 0.12);
+  --mf-shadow-soft: 0 10px 28px rgba(23, 50, 77, 0.08);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  min-width: 320px;
+  margin: 0;
+  color: var(--mf-ink);
+  font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont,
+    "Segoe UI", sans-serif;
+  background:
+    linear-gradient(180deg, rgba(232, 246, 255, 0.72), rgba(245, 251, 253, 0.96) 34%, #ffffff 100%),
+    radial-gradient(circle at 14% 0%, rgba(59, 185, 214, 0.16), transparent 28rem),
+    radial-gradient(circle at 86% 12%, rgba(36, 166, 122, 0.12), transparent 24rem);
+  text-rendering: geometricPrecision;
+}
+
 a {
+  color: inherit;
   text-decoration: none !important;
+}
+
+img {
+  max-width: 100%;
+}
+
+button,
+input,
+select,
+textarea {
+  font: inherit;
+}
+
+::selection {
+  color: white;
+  background: var(--mf-blue);
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: #eff7fa;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #a6cbd9;
+  border: 2px solid #eff7fa;
+  border-radius: 999px;
+}
+
+button,
+a,
+.MuiButton-root {
+  transition:
+    background 180ms ease,
+    border-color 180ms ease,
+    box-shadow 180ms ease,
+    color 180ms ease,
+    transform 180ms ease;
+}
+
+button:focus-visible,
+a:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible {
+  outline: 3px solid rgba(15, 127, 191, 0.24);
+  outline-offset: 3px;
 }
 
 @keyframes shake {
@@ -16,8 +106,216 @@ a {
   100% { transform: rotate(0deg); }
 }
 
+@keyframes measure {
+  from { width: 12%; }
+  to { width: 86%; }
+}
+
 @layer utilities {
   .animate-shake {
     animation: shake 3s infinite;
+  }
+
+  .mf-page {
+    background:
+      linear-gradient(180deg, #f6fcff 0%, #ffffff 44%, #f7fbfa 100%);
+  }
+
+  .mf-container {
+    width: min(1180px, calc(100% - 32px));
+    margin-inline: auto;
+  }
+
+  .mf-card {
+    background: rgba(255, 255, 255, 0.94);
+    border: 1px solid var(--mf-line);
+    border-radius: 16px;
+    box-shadow: var(--mf-shadow-soft);
+  }
+
+  .mf-chip {
+    width: fit-content;
+    border: 1px solid #b7dde9;
+    border-radius: 999px;
+    background: #edf9fc;
+    color: #11637f;
+    font-size: 0.76rem;
+    font-weight: 800;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+  }
+
+  .mf-gradient-text {
+    color: #0f7fbf;
+  }
+}
+
+.MuiTypography-root,
+.MuiButton-root,
+.MuiInputBase-root,
+.MuiChip-root {
+  font-family: Inter, ui-sans-serif, system-ui, sans-serif !important;
+}
+
+.MuiButton-contained,
+.btn-primary,
+button[type="submit"] {
+  border: 0 !important;
+  background: linear-gradient(135deg, var(--mf-blue), var(--mf-green)) !important;
+  box-shadow: 0 12px 28px rgba(15, 127, 191, 0.18) !important;
+}
+
+.MuiButton-contained:hover,
+.btn-primary:hover,
+button[type="submit"]:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 16px 34px rgba(15, 127, 191, 0.22) !important;
+}
+
+.MuiCard-root,
+.card,
+.MuiPaper-root {
+  border: 1px solid var(--mf-line) !important;
+  border-radius: 16px !important;
+  box-shadow: var(--mf-shadow-soft) !important;
+}
+
+.MuiCard-root,
+.card {
+  background: rgba(255, 255, 255, 0.96) !important;
+}
+
+.MuiCard-root:hover,
+.card:hover {
+  box-shadow: var(--mf-shadow) !important;
+}
+
+.MuiTextField-root .MuiOutlinedInput-root,
+input:not([type="checkbox"]):not([type="radio"]),
+select,
+textarea,
+.form-control {
+  border-radius: 12px !important;
+}
+
+.MuiOutlinedInput-root,
+.form-control,
+input:not([type="checkbox"]):not([type="radio"]),
+select,
+textarea {
+  background: white !important;
+  border-color: var(--mf-line) !important;
+}
+
+.MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline,
+.form-control:focus,
+input:focus,
+select:focus,
+textarea:focus {
+  border-color: var(--mf-blue) !important;
+  box-shadow: 0 0 0 4px rgba(15, 127, 191, 0.12) !important;
+}
+
+table {
+  overflow: hidden;
+  border-collapse: separate;
+  border-spacing: 0;
+  background: white;
+  border: 1px solid var(--mf-line);
+  border-radius: 16px;
+  box-shadow: var(--mf-shadow-soft);
+}
+
+thead,
+th {
+  color: #10344b !important;
+  background: #e7f5fb !important;
+}
+
+tbody tr:hover {
+  background: rgba(232, 246, 255, 0.72) !important;
+}
+
+.swal2-popup {
+  border: 1px solid var(--mf-line) !important;
+  border-radius: 18px !important;
+  background: white !important;
+  box-shadow: var(--mf-shadow) !important;
+}
+
+.swal2-confirm {
+  border-radius: 999px !important;
+  background: linear-gradient(135deg, var(--mf-blue), var(--mf-green)) !important;
+}
+
+.nav-shell {
+  background: rgba(255, 255, 255, 0.92);
+  border-bottom: 1px solid var(--mf-line);
+  box-shadow: 0 10px 28px rgba(23, 50, 77, 0.06);
+  backdrop-filter: blur(16px);
+}
+
+.top-ribbon {
+  background: #17324d;
+}
+
+.footer-gradient {
+  background:
+    linear-gradient(135deg, #14324a 0%, #174763 58%, #126a63 100%);
+}
+
+.section-header-modern {
+  background: linear-gradient(135deg, #17324d, #0f7fbf 62%, #24a67a);
+}
+
+.admin-shell {
+  background: #f4fafc !important;
+}
+
+.admin-sidebar {
+  color: white;
+  background: linear-gradient(180deg, #17324d 0%, #12304a 52%, #0f4f58 100%) !important;
+  border-right: 1px solid rgba(255, 255, 255, 0.1) !important;
+  box-shadow: 16px 0 34px rgba(23, 50, 77, 0.16) !important;
+}
+
+.admin-sidebar button {
+  color: rgba(255, 255, 255, 0.8) !important;
+}
+
+.admin-sidebar button:hover,
+.admin-sidebar .admin-active {
+  color: white !important;
+  background: rgba(232, 246, 255, 0.13) !important;
+  box-shadow: inset 3px 0 0 #8be1cc;
+}
+
+.admin-logo-mark,
+.admin-avatar {
+  background: linear-gradient(135deg, #0f7fbf, #24a67a) !important;
+  box-shadow: 0 10px 22px rgba(36, 166, 122, 0.18);
+}
+
+.admin-topbar {
+  background: rgba(255, 255, 255, 0.9) !important;
+  border-bottom: 1px solid var(--mf-line) !important;
+  box-shadow: 0 10px 24px rgba(23, 50, 77, 0.06) !important;
+  backdrop-filter: blur(16px);
+}
+
+.admin-content {
+  background:
+    linear-gradient(180deg, rgba(232, 246, 255, 0.42), rgba(255, 255, 255, 0.78)),
+    #f7fbfc;
+}
+
+@media (max-width: 768px) {
+  .MuiCard-root:hover,
+  .card:hover {
+    transform: none;
+  }
+
+  table {
+    font-size: 0.9rem;
   }
 }

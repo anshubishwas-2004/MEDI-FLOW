@@ -46,6 +46,7 @@ import SearchIcon from "@mui/icons-material/Search";
 import PictureAsPdfIcon from "@mui/icons-material/PictureAsPdf";
 import { jsPDF } from "jspdf";
 import Logo22 from "../../Appointment Component/images/Logo2.png";
+import { useContactInfo } from "../../../services/contactInfo";
 
 // Error Boundary Component
 class ErrorBoundary extends React.Component {
@@ -82,7 +83,7 @@ class ErrorBoundary extends React.Component {
 const colors = {
   darkGray: "#71717D",
   gray: "#828487",
-  pink: "#E6317D",
+  pink: "#0f7fbf",
   white: "#FFFFFF",
   blue: "#2B2C6C",
   green: "#2FB297",
@@ -438,6 +439,7 @@ function AppointmentRow({ appointment, onReject }) {
 }
 
 function Appointments() {
+  const contactInfo = useContactInfo();
   const [appointments, setAppointments] = useState([]);
   const [filteredAppointments, setFilteredAppointments] = useState([]);
   const [openSnackbar, setOpenSnackbar] = useState(false);
@@ -721,8 +723,8 @@ function Appointments() {
       doc.setFontSize(8);
       doc.setTextColor(100, 100, 100);
       doc.text("123 Medical Center Drive, Healthcare City", 15 + logoWidth + 5, 32);
-      doc.text("Phone: (123) 456-7890 | Email: support@mediflow.com", 15 + logoWidth + 5, 36);
-      doc.text("www.mediflow.com", 15 + logoWidth + 5, 40);
+      doc.text(`Phone: ${contactInfo.phone} | Email: ${contactInfo.email || "Configured in backend"}`, 15 + logoWidth + 5, 36);
+      doc.text(contactInfo.website, 15 + logoWidth + 5, 40);
 
       
       doc.setDrawColor(230, 230, 230);

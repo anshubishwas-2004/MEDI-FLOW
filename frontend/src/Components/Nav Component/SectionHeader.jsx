@@ -2,24 +2,10 @@ import React from "react";
 
 const SectionHeader = ({ title }) => {
   return (
-    <div className="relative w-full h-[63px] flex items-center">
-      {/* Dark Blue Main Section */}
-      <div className="w-full h-full bg-[#2b2c6c] relative flex items-center justify-center">
-        
-        {/* Pink Left Triangle */}
-        <div
-          className="absolute left-0 w-[70px] h-full bg-[#E6317D]"
-          style={{ clipPath: "polygon(0 0, 100% 100%, 0 100%)" }}
-        ></div>
-
-        {/* Green Right Section (Extends Further Left Only at Bottom) */}
-        <div
-          className="absolute right-0 w-[35%] h-full bg-[#2FB297]"
-          style={{ clipPath: "polygon(20% 100%, 100% 100%, 100% 0%, 0% 0%)" }}
-        ></div>
-
-        {/* Centered Text */}
-        <span className="text-white text-[24px] md:text-[28px] lg:text-[32px] font-bold font-['Hanken_Grotesk'] tracking-wide uppercase">
+    <div className="relative flex min-h-[82px] w-full items-center overflow-hidden">
+      <div className="section-header-modern relative flex h-full min-h-[82px] w-full items-center justify-center px-6">
+        <div className="absolute right-0 h-full w-[36%] bg-white/10 [clip-path:polygon(18%_0,100%_0,100%_100%,0_100%)]" />
+        <span className="relative text-center font-sans text-[24px] font-extrabold uppercase tracking-[0.12em] text-white md:text-[30px]">
           {title}
         </span>
       </div>

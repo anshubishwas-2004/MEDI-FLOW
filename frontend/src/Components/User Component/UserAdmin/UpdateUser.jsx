@@ -157,7 +157,7 @@ function UpdateUser({ user, onClose }) {
   const colors = {
     darkGray: "#71717d",
     gray: "#828487",
-    pink: "#e6317d",
+    pink: "#0f7fbf",
     white: "#ffffff",
     blue: "#2b2c6c",
     green: "#2fb297",

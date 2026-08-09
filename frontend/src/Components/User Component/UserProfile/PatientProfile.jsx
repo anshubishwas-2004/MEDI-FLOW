@@ -216,7 +216,7 @@ function PatientProfile() {
           height: "80vh",
         }}
       >
-        <CircularProgress sx={{ color: "#e6317d" }} />
+        <CircularProgress sx={{ color: "#0f7fbf" }} />
       </Box>
     );
   }
@@ -328,7 +328,7 @@ function PatientProfile() {
                 width: 150,
                 height: 150,
                 border: "5px solid white",
-                bgcolor: "#e6317d",
+                bgcolor: "#0f7fbf",
                 fontSize: 48,
                 fontWeight: "bold",
               }}
@@ -356,7 +356,7 @@ function PatientProfile() {
             startIcon={<EditIcon />}
             onClick={() => setIsEditing(true)}
             sx={{
-              bgcolor: "#e6317d",
+              bgcolor: "#0f7fbf",
               "&:hover": { bgcolor: "#c62a6a" },
               borderRadius: 2,
               px: 3,
@@ -535,7 +535,7 @@ function PatientProfile() {
                     <Grid container spacing={3}>
                       <Grid item xs={12}>
                         <Box sx={{ display: "flex", alignItems: "center" }}>
-                          <BloodIcon sx={{ color: "#e6317d", mr: 2 }} />
+                          <BloodIcon sx={{ color: "#0f7fbf", mr: 2 }} />
                           <Box>
                             <Typography variant="body2" color="#71717d">
                               Blood Group
@@ -545,7 +545,7 @@ function PatientProfile() {
                                 label={user.bloodGroup}
                                 sx={{
                                   bgcolor: "#f8e0e8",
-                                  color: "#e6317d",
+                                  color: "#0f7fbf",
                                   fontWeight: "bold",
                                   borderRadius: 1,
                                 }}
@@ -622,7 +622,7 @@ function PatientProfile() {
                       }}
                     >
                       <MedicalIcon
-                        sx={{ fontSize: 48, color: "#e6317d", mb: 2 }}
+                        sx={{ fontSize: 48, color: "#0f7fbf", mb: 2 }}
                       />
                       <Typography
                         variant="subtitle1"
@@ -644,7 +644,7 @@ function PatientProfile() {
                         variant="contained"
                         onClick={handleOpenUploadDialog}
                         sx={{
-                          bgcolor: "#e6317d",
+                          bgcolor: "#0f7fbf",
                           "&:hover": { bgcolor: "#c62a6a" },
                           borderRadius: 2,
                           px: 3,
@@ -675,7 +675,7 @@ function PatientProfile() {
                             height: "100%",
                           }}
                         >
-                          <CircularProgress sx={{ color: "#e6317d" }} />
+                          <CircularProgress sx={{ color: "#0f7fbf" }} />
                         </Box>
                       ) : reports.length === 0 ? (
                         <Box
@@ -765,7 +765,7 @@ function PatientProfile() {
                     },
                     {
                       label: "Run Symptom Analysis",
-                      icon: <PsychologyIcon sx={{ color: "#e6317d" }} />,
+                      icon: <PsychologyIcon sx={{ color: "#0f7fbf" }} />,
                       path: "/symptom-analysis",
                     },
 

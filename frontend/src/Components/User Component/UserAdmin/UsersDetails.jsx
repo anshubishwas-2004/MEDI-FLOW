@@ -27,8 +27,10 @@ import { jsPDF } from "jspdf";
 import autoTable from "jspdf-autotable";
 import User from "./User";
 import UpdateUser from "./UpdateUser";
+import { useContactInfo } from "../../../services/contactInfo";
 
 export default function UsersDetails({ onAddPatientClick }) {
+  const contactInfo = useContactInfo();
   const [users, setUsers] = useState([]);
   const [selectedUser, setSelectedUser] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -163,9 +165,9 @@ export default function UsersDetails({ onAddPatientClick }) {
     doc.setFont("helvetica", "normal");
     doc.setFontSize(8);
     doc.setTextColor(100, 100, 100);
-    doc.text("123 Healthcare Boulevard, Medical District", 15, 32);
-    doc.text("Phone: (071) 145-7890 | Email: info@smarthealthcare.com", 15, 36);
-    doc.text("www.smarthealthcare.com", 15, 40);
+    doc.text(contactInfo.address, 15, 32);
+    doc.text(`Phone: ${contactInfo.phone} | Email: ${contactInfo.email || "Configured in backend"}`, 15, 36);
+    doc.text(contactInfo.website, 15, 40);
 
     // Add date in header (right side)
     doc.setFontSize(9);
@@ -291,7 +293,7 @@ export default function UsersDetails({ onAddPatientClick }) {
 
         // Center - website
         doc.text(
-          "www.smarthealthcare.com",
+          contactInfo.website,
           doc.internal.pageSize.getWidth() / 2,
           pageHeight - 12,
           {

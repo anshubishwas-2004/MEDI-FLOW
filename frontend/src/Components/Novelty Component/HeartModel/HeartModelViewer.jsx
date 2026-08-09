@@ -60,7 +60,7 @@ function HeartMesh({ affectedSymptoms = [], focusPart, cameraRef }) {
 
         child.material = child.material.clone();
         child.material.emissive = shouldHighlight
-          ? new THREE.Color("#e6317d")
+          ? new THREE.Color("#0f7fbf")
           : originalColors.current.get(child.uuid) || new THREE.Color("#111");
 
         if (shouldHighlight) {
@@ -145,7 +145,7 @@ export default function HeartModelViewer({
           {/* Loading indicator that shows before canvas loads */}
           <div className="absolute inset-0 z-0 flex items-center justify-center bg-white">
             <div className="flex flex-col items-center">
-              <div className="w-10 h-10 border-4 border-pink-500 rounded-full border-t-transparent animate-spin"></div>
+              <div className="w-10 h-10 border-4 border-blue-600 rounded-full border-t-transparent animate-spin"></div>
               <p className="mt-3 font-medium text-gray-600">
                 Loading 3D Heart...
               </p>

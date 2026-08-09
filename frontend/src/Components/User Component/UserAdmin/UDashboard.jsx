@@ -160,7 +160,7 @@ function UDashboard() {
         data: [65, 78, 52, 91, 43, 56, 61, 87, 45, 53, 42, 48],
         fill: true,
         backgroundColor: "rgba(230, 49, 125, 0.2)",
-        borderColor: "#e6317d",
+        borderColor: "#0f7fbf",
         tension: 0.4,
       },
     ],
@@ -171,7 +171,7 @@ function UDashboard() {
     datasets: [
       {
         data: [42, 56, 2],
-        backgroundColor: ["#2b2c6c", "#e6317d", "#2fb297"],
+        backgroundColor: ["#2b2c6c", "#0f7fbf", "#2fb297"],
         borderWidth: 0,
       },
     ],
@@ -222,7 +222,7 @@ function UDashboard() {
             height: "80vh",
           }}
         >
-          <CircularProgress sx={{ color: "#e6317d" }} />
+          <CircularProgress sx={{ color: "#0f7fbf" }} />
         </Box>
       </UAdminLayout>
     );
@@ -287,11 +287,11 @@ function UDashboard() {
                     <Typography color="textSecondary" variant="body2" sx={{ mb: 1 }}>
                       New Patients (This Month)
                     </Typography>
-                    <Typography variant="h4" sx={{ fontWeight: 600, color: "#e6317d" }}>
+                    <Typography variant="h4" sx={{ fontWeight: 600, color: "#0f7fbf" }}>
                       {stats.newPatients}
                     </Typography>
                   </Box>
-                  <Avatar sx={{ bgcolor: "#e6317d20", color: "#e6317d", width: 56, height: 56 }}>
+                  <Avatar sx={{ bgcolor: "#0f7fbf20", color: "#0f7fbf", width: 56, height: 56 }}>
                     <PersonAddIcon />
                   </Avatar>
                 </Box>
@@ -440,11 +440,11 @@ function UDashboard() {
                     variant="outlined"
                     size="small"
                     sx={{ 
-                      color: "#e6317d", 
-                      borderColor: "#e6317d",
+                      color: "#0f7fbf", 
+                      borderColor: "#0f7fbf",
                       '&:hover': {
-                        borderColor: "#e6317d",
-                        backgroundColor: "#e6317d10"
+                        borderColor: "#0f7fbf",
+                        backgroundColor: "#0f7fbf10"
                       }
                     }}
                     onClick={() => navigate("/User-Management")}

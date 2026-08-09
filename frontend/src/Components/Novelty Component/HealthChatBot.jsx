@@ -369,7 +369,7 @@ const HealthChatBot = ({ open, onClose }) => {
                     {msg.sender === "user" && (
                       <Avatar 
                         sx={{ 
-                          bgcolor: "#e6317d",
+                          bgcolor: "#0f7fbf",
                           width: 28, 
                           height: 28,
                           ml: 1,

@@ -15,6 +15,8 @@ const prescriptionRoute = require("./Routes/DoctorManagement/prescriptionRoute")
 const doctorLeaveRoutes = require("./Routes/DoctorManagement/doctorLeaveRoutes"); // Doctor Leave Route
 const diagnosisRoute = require("./Routes/DoctorManagement/diagnosisRoute"); // Diagnosis Route
 const noveltyRoutes = require("./Routes/NoveltyRoutes"); // Import Novelty Routes
+const contactMessageRoutes = require("./Routes/ContactMessageRoutes");
+const configRoutes = require("./Routes/ConfigRoutes");
 
 const app = express(); // initialize express application
 const analysisRoutes = require("./Routes/AnalysisRoutes");
@@ -22,8 +24,15 @@ const vitalsRoutes = require("./Routes/VitalsRoutes");
 
 // Middleware
 const allowedOrigins = [
-  process.env.FRONTEND01
-];
+  process.env.FRONTEND01,
+  process.env.FRONTEND_URL,
+  "http://localhost:5173",
+  "http://localhost:5174",
+  "http://localhost:5175",
+  "http://127.0.0.1:5173",
+  "http://127.0.0.1:5174",
+  "http://127.0.0.1:5175",
+].filter(Boolean);
 
 app.use(cors({
   origin: function (origin, callback) {
@@ -58,6 +67,8 @@ app.use("/api/auth/forgot-password", forgotPasswordRoute); // Routes for Forgot 
 app.use("/api/novelty", noveltyRoutes); // This links the API to the Novelty Routes
 app.use("/api/analysis", analysisRoutes);
 app.use("/api/vitals", vitalsRoutes);
+app.use("/api/contact-messages", contactMessageRoutes);
+app.use("/api/config", configRoutes);
 
 //Medical Report Routes
 const medicalReportRoutes = require("./Routes/medicalReportRoutes");

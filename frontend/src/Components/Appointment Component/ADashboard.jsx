@@ -45,12 +45,12 @@ import { PieChart, Pie, Cell, ResponsiveContainer, BarChart, Bar, XAxis, YAxis, 
 const colors = {
   darkGray: "#71717D",
   gray: "#828487",
-  pink: "#E6317D",
+  pink: "#0f7fbf",
   white: "#FFFFFF",
   blue: "#2B2C6C",
   green: "#2FB297",
   yellow: "#f4b400",
-  purple: "#673AB7",
+  purple: "#24a67a",
   lightGray: "#f5f5f5",
 };
 

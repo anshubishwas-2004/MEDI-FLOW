@@ -220,11 +220,11 @@ const DiagnosisForm = () => {
 
   return (
     <DAdminLayout>
-      <div className="min-h-screen bg-gradient-to-br from-indigo-50 to-pink-50 py-8 px-4 sm:px-6 lg:px-8">
+      <div className="min-h-screen bg-gradient-to-br from-indigo-50 to-blue-50 py-8 px-4 sm:px-6 lg:px-8">
         <div className="max-w-6xl mx-auto">
           <Paper elevation={3} className="p-6 sm:p-8 rounded-xl shadow-lg">
             {/* Header with gradient */}
-            <div className="bg-gradient-to-r from-indigo-600 to-pink-500 text-white p-6 rounded-lg mb-8">
+            <div className="bg-gradient-to-r from-indigo-600 to-blue-600 text-white p-6 rounded-lg mb-8">
               <div className="flex items-center justify-between">
                 <div>
                   <Typography variant="h4" className="font-bold text-2xl sm:text-3xl mb-2">
@@ -282,7 +282,7 @@ const DiagnosisForm = () => {
                             ? 'bg-green-100 text-green-800' 
                             : appointment.status === 'Pending'
                               ? 'bg-yellow-100 text-yellow-800'
-                              : 'bg-pink-100 text-pink-800'
+                              : 'bg-blue-100 text-blue-800'
                         }`}>
                           {appointment.status}
                         </span>
@@ -327,7 +327,7 @@ const DiagnosisForm = () => {
                         variant="contained" 
                         onClick={handleAddSymptom}
                         disabled={!formData.currentSymptom.trim()}
-                        className="h-10 min-w-[100px] bg-pink-500 hover:bg-pink-600 text-white rounded-lg shadow-sm"
+                        className="h-10 min-w-[100px] bg-blue-600 hover:bg-blue-700 text-white rounded-lg shadow-sm"
                       >
                         Add
                       </Button>
@@ -341,7 +341,7 @@ const DiagnosisForm = () => {
                             key={symptom}
                             label={symptom}
                             onDelete={() => handleRemoveSymptom(symptom)}
-                            className="bg-pink-100 text-pink-800 rounded-full px-3 py-1 text-sm font-medium"
+                            className="bg-blue-100 text-blue-800 rounded-full px-3 py-1 text-sm font-medium"
                             sx={{
                               '& .MuiChip-deleteIcon': {
                                 color: '#9d174d',
@@ -459,7 +459,7 @@ const DiagnosisForm = () => {
                   variant="outlined"
                   startIcon={<Cancel />}
                   onClick={() => navigate(-1)}
-                  className="h-11 border-pink-500 text-pink-500 hover:border-pink-600 hover:text-pink-600 rounded-lg"
+                  className="h-11 border-blue-600 text-blue-600 hover:border-blue-700 hover:text-blue-700 rounded-lg"
                   sx={{
                     '&:hover': {
                       backgroundColor: 'rgba(236, 72, 153, 0.08)'

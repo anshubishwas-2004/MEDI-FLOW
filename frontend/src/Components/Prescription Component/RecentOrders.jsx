@@ -285,7 +285,7 @@ function RecentOrders() {
                           size="small"
                           onClick={() => handleViewDetails(prescription._id)}
                           sx={{
-                            bgcolor: "#e6317d",
+                            bgcolor: "#0f7fbf",
                             "&:hover": { bgcolor: "#c62a6a" },
                           }}
                         >

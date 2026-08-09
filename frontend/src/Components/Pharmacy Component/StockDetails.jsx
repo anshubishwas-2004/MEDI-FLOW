@@ -69,7 +69,7 @@ function StockDetails({ stockItems, onDelete, onUpdateClick }) {
           onClick={() => setActiveTab('low')}
           className={`px-4 py-2 text-sm font-medium transition-all border-b-2 whitespace-nowrap ${
             activeTab === 'low' 
-              ? 'border-[#e6317d] text-[#e6317d]' 
+              ? 'border-[#0f7fbf] text-[#0f7fbf]' 
               : 'border-transparent text-[#71717d] hover:text-[#2b2c6c]'
           }`}
         >
@@ -177,7 +177,7 @@ function StockDetails({ stockItems, onDelete, onUpdateClick }) {
                             </button>
                             <button 
                               onClick={() => onDelete(item._id)}
-                              className="text-[#e6317d] hover:bg-[#e6317d]/10 p-2 rounded-full transition-all"
+                              className="text-[#0f7fbf] hover:bg-[#0f7fbf]/10 p-2 rounded-full transition-all"
                               title="Delete"
                             >
                               <Trash2 size={18} />

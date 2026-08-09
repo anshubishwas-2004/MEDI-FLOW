@@ -148,7 +148,7 @@ function PDashboard() {
         backgroundColor: [
           "#2b2c6c",
           "#2fb297",
-          "#e6317d",
+          "#0f7fbf",
           "#FFB347",
           "#86C5DA",
         ],
@@ -264,7 +264,7 @@ function PDashboard() {
               sx={{
                 height: "100%",
                 borderRadius: 2,
-                background: "linear-gradient(45deg, #e6317d 30%, #ec5598 90%)",
+                background: "linear-gradient(45deg, #0f7fbf 30%, #3bb9d6 90%)",
                 color: "white",
               }}
             >

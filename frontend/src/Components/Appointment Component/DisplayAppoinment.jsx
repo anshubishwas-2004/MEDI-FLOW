@@ -19,8 +19,10 @@ import {
 } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
+import { useContactInfo } from "../../services/contactInfo";
 
 function DisplayAppointment() {
+  const contactInfo = useContactInfo();
   const [patientDetails, setPatientDetails] = useState(null);
   const [isEditing, setIsEditing] = useState(false);
   const [formData, setFormData] = useState({
@@ -38,19 +40,21 @@ function DisplayAppointment() {
   useEffect(() => {
     const token = localStorage.getItem("token");
     if (!token) {
-      navigate("/Login");
+      navigate("/login");
       return;
     }
 
     axios
-  .get(`${import.meta.env.VITE_API_URL}/api/appoinment/`, {
+  .get(`${import.meta.env.VITE_API_URL}/api/appoinment/my`, {
         headers: { Authorization: `Bearer ${token}` },
       })
       .then((response) => {
         const lastAppointment =
-          response.data.appoinments[response.data.appoinments.length - 1];
+          response.data.appoinments?.[0];
         setPatientDetails(lastAppointment);
-        setFormData(lastAppointment);
+        if (lastAppointment) {
+          setFormData(lastAppointment);
+        }
       })
       .catch((error) => {
         console.error("Error fetching appointment details:", error);
@@ -77,8 +81,9 @@ function DisplayAppointment() {
       tempErrors.name = "Name cannot contain numbers";
     }
 
-    if (!/^0[1-9][0-9]{8}$/.test(formData.phone)) {
-      tempErrors.phone = "Phone must start with 0 and be 10 digits";
+    const cleanPhone = String(formData.phone || "").replace(/[\s-]/g, "");
+    if (!/^(\+91)?[6-9]\d{9}$/.test(cleanPhone) && !/^0[6-9]\d{9}$/.test(cleanPhone)) {
+      tempErrors.phone = "Enter a valid Indian mobile number";
     }
 
     if (!/^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$/.test(formData.email)) {
@@ -175,7 +180,7 @@ function DisplayAppointment() {
         icon: "question",
         showCancelButton: true,
         confirmButtonColor: "#2b2c6c",
-        cancelButtonColor: "#e6317d",
+        cancelButtonColor: "#0f7fbf",
         confirmButtonText: "Yes, Download",
         cancelButtonText: "No, Return Home",
       }).then((result) => {
@@ -208,7 +213,7 @@ function DisplayAppointment() {
       text: "Are you sure you want to cancel this appointment? This action cannot be undone.",
       icon: "warning",
       showCancelButton: true,
-      confirmButtonColor: "#e6317d",
+      confirmButtonColor: "#0f7fbf",
       cancelButtonColor: "#828487",
       confirmButtonText: "Yes, Cancel Appointment",
       cancelButtonText: "No, Keep Appointment",
@@ -321,9 +326,9 @@ function DisplayAppointment() {
     doc.setFont("helvetica", "normal");
     doc.setFontSize(8);
     doc.setTextColor(100, 100, 100);
-    doc.text("123 Medical Center Drive, Healthcare City", 15 + logoWidth + 5, 32);
-    doc.text("Phone: (123) 456-7890 | Email: support@mediflow.com", 15 + logoWidth + 5, 36);
-    doc.text("www.mediflow.com", 15 + logoWidth + 5, 40);
+    doc.text(contactInfo.address, 15 + logoWidth + 5, 32);
+    doc.text(`Phone: ${contactInfo.phone} | Email: ${contactInfo.email || "Configured in backend"}`, 15 + logoWidth + 5, 36);
+    doc.text(contactInfo.website, 15 + logoWidth + 5, 40);
 
   
     // Add header line separator
@@ -452,7 +457,7 @@ function DisplayAppointment() {
     doc.setFont("helvetica", "normal");
     doc.setFontSize(9);
     doc.setTextColor(60, 60, 60);
-    const instructions = "Please arrive 15 minutes before your appointment time. Bring your ID and insurance information if applicable. Contact our help desk at 1-800-HEALTH for rescheduling or inquiries.";
+    const instructions = `Please arrive 15 minutes before your appointment time. Bring your ID and previous reports if applicable. Contact our help desk at ${contactInfo.phone} for rescheduling or inquiries.`;
     const splitInstructions = doc.splitTextToSize(instructions, 180);
     doc.text(splitInstructions, 15, 200);
 
@@ -487,7 +492,7 @@ function DisplayAppointment() {
 
       // Center - website
       doc.text(
-        "www.mediflow.com",
+        contactInfo.website,
         doc.internal.pageSize.getWidth() / 2,
         doc.internal.pageSize.height - 12,
         {
@@ -571,7 +576,7 @@ function DisplayAppointment() {
           )}
 
           <div className="bg-[#eaecee] rounded-xl shadow-lg overflow-hidden border border-[#2fb297]">
-            <div className="bg-gradient-to-r from-[#2b2c6c] to-[#e6317d] py-5 px-6">
+            <div className="bg-gradient-to-r from-[#2b2c6c] to-[#0f7fbf] py-5 px-6">
               <h2 className="flex items-center text-xl font-bold text-white">
                 {isEditing ? (
                   <>
@@ -636,7 +641,7 @@ function DisplayAppointment() {
                       />
                     </div>
                     {errors.name && (
-                      <p className="text-[#e6317d] text-xs mt-1">
+                      <p className="text-[#0f7fbf] text-xs mt-1">
                         {errors.name}
                       </p>
                     )}
@@ -656,12 +661,12 @@ function DisplayAppointment() {
                         value={formData.phone}
                         onChange={handleChange}
                         required
-                        placeholder="Enter your phone number (e.g., 0712345678)"
+                        placeholder="Enter your phone number (e.g., +91 9334231954)"
                         className="w-full pl-12 pr-4 py-2.5 bg-[#f5f5f5] border border-[#828487] rounded-lg text-gray-700 focus:outline-none focus:ring-2 focus:ring-[#2b2c6c] focus:border-transparent"
                       />
                     </div>
                     {errors.phone && (
-                      <p className="text-[#e6317d] text-xs mt-1">
+                      <p className="text-[#0f7fbf] text-xs mt-1">
                         {errors.phone}
                       </p>
                     )}
@@ -685,7 +690,7 @@ function DisplayAppointment() {
                       />
                     </div>
                     {errors.nic && (
-                      <p className="text-[#e6317d] text-xs mt-1">
+                      <p className="text-[#0f7fbf] text-xs mt-1">
                         {errors.nic}
                       </p>
                     )}
@@ -710,7 +715,7 @@ function DisplayAppointment() {
                       />
                     </div>
                     {errors.email && (
-                      <p className="text-[#e6317d] text-xs mt-1">
+                      <p className="text-[#0f7fbf] text-xs mt-1">
                         {errors.email}
                       </p>
                     )}
@@ -746,7 +751,7 @@ function DisplayAppointment() {
                     </button>
                     <button
                       type="submit"
-                      className="flex-1 py-2.5 bg-[#e6317d] hover:bg-[#2b2c6c] text-white rounded-lg font-medium transition duration-200 focus:outline-none focus:ring-2 focus:ring-[#2b2c6c] focus:ring-opacity-50 flex items-center justify-center"
+                      className="flex-1 py-2.5 bg-[#0f7fbf] hover:bg-[#2b2c6c] text-white rounded-lg font-medium transition duration-200 focus:outline-none focus:ring-2 focus:ring-[#2b2c6c] focus:ring-opacity-50 flex items-center justify-center"
                       style={{ borderRadius: "7px" }}
                     >
                       Save Changes
@@ -837,7 +842,7 @@ function DisplayAppointment() {
                     </button>
                     <button
                       onClick={handleDelete}
-                      className="py-2.5 bg-[#e6317d] hover:bg-[#71717d] text-white rounded-lg font-medium transition duration-200 focus:outline-none focus:ring-2 focus:ring-[#e6317d] focus:ring-opacity-50 flex items-center justify-center"
+                      className="py-2.5 bg-[#0f7fbf] hover:bg-[#71717d] text-white rounded-lg font-medium transition duration-200 focus:outline-none focus:ring-2 focus:ring-[#0f7fbf] focus:ring-opacity-50 flex items-center justify-center"
                       style={{ borderRadius: "7px" }}
                     >
                       <Trash2 size={18} className="mr-2" />
@@ -901,7 +906,7 @@ function DisplayAppointment() {
               <p className="text-sm text-[#828487] mt-1">
                 If you need to reschedule your appointment or have any questions,
                 please contact our help desk at{" "}
-                <span className="font-medium">1-800-HEALTH</span>. Please arrive
+                <span className="font-medium">{contactInfo.phone}</span>. Please arrive
                 15 minutes before your appointment time. Bring your ID and
                 insurance information if applicable.
               </p>

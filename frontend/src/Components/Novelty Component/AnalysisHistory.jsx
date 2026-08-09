@@ -133,7 +133,7 @@ function AnalysisHistory() {
               <Link
                 key={index}
                 to={link.path}
-                className="relative py-2 text-black hover:text-[#e6317d] after:absolute after:left-0 after:bottom-0 after:h-0.5 after:w-0 after:bg-[#e6317d] after:transition-all after:duration-300 hover:after:w-full cursor-pointer"
+                className="relative py-2 text-black hover:text-[#0f7fbf] after:absolute after:left-0 after:bottom-0 after:h-0.5 after:w-0 after:bg-[#0f7fbf] after:transition-all after:duration-300 hover:after:w-full cursor-pointer"
               >
                 {link.name}
               </Link>
@@ -149,7 +149,7 @@ function AnalysisHistory() {
       <div className="max-w-6xl mx-auto mt-10">
         <div className="flex items-center justify-between mb-8">
           <div className="flex items-center">
-            <TimelineIcon style={{ color: "#e6317d", fontSize: 32, marginRight: 12 }} />
+            <TimelineIcon style={{ color: "#0f7fbf", fontSize: 32, marginRight: 12 }} />
             <Typography 
               variant="h4" 
               style={{ 
@@ -191,11 +191,11 @@ function AnalysisHistory() {
 
         {loading ? (
           <div className="flex justify-center mt-20">
-            <CircularProgress style={{ color: "#e6317d" }} size={60} thickness={5} />
+            <CircularProgress style={{ color: "#0f7fbf" }} size={60} thickness={5} />
           </div>
         ) : records.length === 0 ? (
           <div className="p-12 text-center border border-gray-200 shadow-sm bg-gray-50 rounded-xl">
-            <TimelineIcon style={{ color: "#e6317d", fontSize: 80, opacity: 0.7 }} />
+            <TimelineIcon style={{ color: "#0f7fbf", fontSize: 80, opacity: 0.7 }} />
             <Typography 
               variant="h5" 
               style={{ color: "#71717d", marginTop: 24 }}
@@ -217,7 +217,7 @@ function AnalysisHistory() {
                   className="overflow-hidden transition duration-300 bg-white border border-gray-100 shadow-lg rounded-xl hover:shadow-xl"
                 >
                   <div className="relative">
-                    <div className="h-1.5 bg-gradient-to-r from-[#2fb297] to-[#e6317d]"></div>
+                    <div className="h-1.5 bg-gradient-to-r from-[#2fb297] to-[#0f7fbf]"></div>
                     
                     <div className="p-6">
                       <div className="flex items-start justify-between mb-4">
@@ -239,10 +239,10 @@ function AnalysisHistory() {
                             label={symptom}
                             style={{
                               backgroundColor: "#f0f0f0",
-                              color: "#e6317d",
+                              color: "#0f7fbf",
                               fontWeight: "500",
                               fontSize: "0.8rem",
-                              border: "1px solid #e6317d40",
+                              border: "1px solid #0f7fbf40",
                               marginBottom: 4
                             }}
                           />
@@ -250,7 +250,7 @@ function AnalysisHistory() {
                       </div>
                       
                       <div className="flex justify-end mt-6">
-                        <button className="text-[#2b2c6c] hover:text-[#e6317d] font-medium transition duration-200">
+                        <button className="text-[#2b2c6c] hover:text-[#0f7fbf] font-medium transition duration-200">
                           View Details
                         </button>
                       </div>
